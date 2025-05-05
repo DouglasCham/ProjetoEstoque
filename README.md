@@ -17,9 +17,9 @@ mySQL
 <ins>Objetivo do projeto</ins>
 ```
 O objetivo deste projeto é realizar um controle de estoque de produtos.
-O sistema irá armazenar informações como código do produto e quantidade
-e informará em qual endereço está localizado, mas com a possibilidade
-de alterar o endereço do mesmo quando necessário.
+O sistema irá armazenar informações como código do produto, quantidade
+e informará em qual endereço está localizado. Possibilitando alterar o endereço 
+e buscar os produto cadastrados quando necessário.
 ```
 
 <ins>Requisitos do projeto</ins><br/>

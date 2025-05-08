@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar produtos</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../static/css/style.css"/>
+</head>
+<body>
+    <div id="menuPrincipal" class="menuPrincipal ocultar">
+      <div class="menuItens">
+        <a class="itemMenu" href="/cadastrar.html">Cadastrar produto</a>
+        <a class="itemMenu" href="/transferir.html">Transferir endereço</a>
+        <a class="itemMenu" href="/listar.html">Listar produtos</a>
+    </div>
+        <div>
+            <img src="../static/imgs/menu.svg" id="btn_menu" class="btn_menu"/>
+        </div>
+    </div>
+
+    <div class="headerContainer">
+        <h1>Listar produtos</h1>
+    </div>
+    <main>
+        <div class="formContainer w-75 p-3">
+                <form id="formularioListar">
+                    <fieldset class="row mb-3">
+                            <div class="row mb-3">
+                                <label for="codProduto" class="col-sm-2 col-form-label">Código do produto</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="codProduto">
+                            </div>
+                            <button type="submit" class="btn btn-primary col-sm-2">Listar</button>
+                    </fieldset>
+                    <div id="mensagemErro" style="color: red;"></div>    
+                </form>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Cod.</th>
+                            <th>Nome</th>
+                            <th>Quantidade</th>
+                            <th>Endereço</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Teste</td>
+                            <td>10</td>
+                            <td>N/D</td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+    </main>
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

@@ -67,5 +67,13 @@
     </main>
     <script src="/js/jquery.js"></script>
     <script src="/js/script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.get("/api/check").fail(function(){
+            window.location.href = "/";
+            $('#mensagemErro').html("Precisa estar logado!");
+            });
+        });
+    </script>
 </body>
 </html>

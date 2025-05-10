@@ -30,6 +30,28 @@
     </main>
 
     <script src="/js/jquery.js"></script>
-    <script src="/js/script.js"></script>
+<!--    <script src="/js/script.js"></script>-->
+    <script>
+        $('#formularioAcesso').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/api/login",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    usuario: $('#usuario').val(),
+                    senha: $('#senha').val()
+                }),
+                success: function(response) {
+                    $('#mensagemErro').html('');
+                    window.location.href = "/cadastrar";
+                },
+                error: function(err) {
+                    $('#mensagemErro').html("Usuário/Senha incorretos.");
+                    console.log(err);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

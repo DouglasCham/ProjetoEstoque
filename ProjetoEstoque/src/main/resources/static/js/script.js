@@ -1,29 +1,9 @@
 $(document).ready( function() {
-
+    
     $("#btn_menu").on("click", function(){
         $("#menuPrincipal").toggleClass("ocultar");
     });
 
-    //VALIDAÇÃO ACESSO
-    $('#formularioAcesso').on('submit', function(e) {
-            e.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: "/api/login",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    usuario: $('#usuario').val(),
-                    senha: $('#senha').val()
-                }),
-                success: function(response) {
-                    $('#mensagemErro').html('');
-                    window.location.href = "cadastrar.html";
-                },
-                error: function() {
-                    $('#mensagemErro').html("Usuário/Senha incorretos.");
-                }
-            });
-        });
     //VALIDAÇÃO CADASTRO
     $('#formularioCadastro').on('submit', function(event) {
         event.preventDefault();

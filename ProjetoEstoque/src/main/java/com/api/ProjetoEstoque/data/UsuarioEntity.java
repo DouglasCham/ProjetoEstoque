@@ -15,7 +15,8 @@ import org.springframework.stereotype.Component;
 public class UsuarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int ID;
-    private String USUARIO;
-    private String SENHA;
+    private Integer id;
+    
+    private String usuario;
+    private String senha;
 }

@@ -50,11 +50,11 @@ $(document).ready( function() {
                 $('#formularioCadastro')[0].reset();
             },
             error: function(xhr) {
-                let mensagem = "Erro ao cadastrar produto.";
+                let mensagem = xhr.responseText || "Erro ao cadastrar produto.";
                 if (xhr.status === 409 || xhr.status === 400) {
                     mensagem = xhr.responseText;
                 }
-                $('#mensagemCadastro').html('<p style="color:red">' + mensagem + '</p>');
+                $('#mensagemCadastro').html('<p style="color:red;">' + mensagem + '</p>');
             }
         });
       });

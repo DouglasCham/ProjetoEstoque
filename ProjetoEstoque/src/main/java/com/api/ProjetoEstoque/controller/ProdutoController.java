@@ -2,6 +2,7 @@ package com.api.ProjetoEstoque.controller;
 
 import com.api.ProjetoEstoque.data.ProdutoEntity;
 import com.api.ProjetoEstoque.service.ProdutoService;
+import jakarta.validation.Valid;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +41,12 @@ public class ProdutoController {
                     .body("Produto com código " + cod + " não encontrado."));
     }
     @PostMapping("/cadastrar")
-    public ResponseEntity<?> cadastrarProduto(@RequestBody ProdutoEntity produto){
+    public ResponseEntity<?> cadastrarProduto(@Valid @RequestBody ProdutoEntity produto, BindingResult result){
+        if (result.hasErrors()) {
+            StringBuilder erros = new StringBuilder();
+            result.getAllErrors().forEach(e -> erros.append(e.getDefaultMessage()).append("<br>"));
+        return ResponseEntity.badRequest().body(erros.toString());
+        }
         try {
             var novoProduto = produtoService.cadastrarProduto(produto);
             return new ResponseEntity<>(novoProduto, HttpStatus.CREATED);
@@ -57,7 +64,7 @@ public class ProdutoController {
         }
     }
     @PutMapping("/transferir")
-    public ResponseEntity<?> transferirProduto(@RequestBody Map<String, String> payload) {
+    public ResponseEntity<?> transferirProduto(@Valid @RequestBody Map<String, String> payload) {
         String cod = payload.get("cod");
         String novoEndereco = payload.get("endereco");
 

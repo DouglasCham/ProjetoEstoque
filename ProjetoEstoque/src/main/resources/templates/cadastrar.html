@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de produto</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/styles.css"/>
 </head>
 <body>
     <div id="menuPrincipal" class="menuPrincipal ocultar">
       <div class="menuItens">
-        <a class="itemMenu" href="/cadastrar.html">Cadastrar produto</a>
-        <a class="itemMenu" href="/transferir.html">Transferir endereço</a>
-        <a class="itemMenu" href="/listar.html">Listar produtos</a>
+        <a class="btn btn-secondary itemMenu" href="/cadastrar">Cadastrar produto</a>
+        <a class="btn btn-secondary itemMenu" href="/transferir">Transferir endereço</a>
+        <a class="btn btn-secondary itemMenu" href="/listar">Listar produtos</a>
+        <br/>
+        <button id="btn_logout" class="btn btn-danger">Deslogar</button>
     </div>
         <div>
-            <img src="../static/imgs/menu.svg" id="btn_menu" class="btn_menu"/>
+            <img src="/imgs/menu.svg" id="btn_menu" class="btn_menu"/>
         </div>
     </div>
 
@@ -66,12 +68,16 @@
         </div>
     </main>
     <script src="/js/jquery.js"></script>
-    <script src="/js/script.js"></script>
+    <script src="/js/scripts.js"></script>
     <script>
         $(document).ready(function() {
             $.get("/api/check").fail(function(){
-            window.location.href = "/";
-            $('#mensagemErro').html("Precisa estar logado!");
+                window.location.href = "/";
+            });
+        });
+        $("#btn_logout").on("click", function() {
+            $.get("/api/logout").done(function() {
+                window.location.href = "/";
             });
         });
     </script>

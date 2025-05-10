@@ -31,8 +31,11 @@ public class ProdutoService {
     public ProdutoEntity getProdutoByCod(Integer cod){
         return produtoRepository.findByCod(cod);
     }
-    public void deletarProduto(Integer produtoID){
-        ProdutoEntity produto = getProdutoID(produtoID);
-        produtoRepository.deleteById(produto.getId());
+    public boolean deletarProduto(Integer id){
+        if(produtoRepository.existsById(id)){
+            produtoRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

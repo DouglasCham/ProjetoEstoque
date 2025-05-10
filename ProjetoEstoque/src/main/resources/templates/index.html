@@ -21,7 +21,7 @@
                       <input type="password" class="form-control" id="senha" placeholder="Senha">
                     </div>
                 </div>
-                <div id="mensagemErro" style="color: red;"></div>
+                <div id="loginError" style="color: red;"></div>
                 <div class="d-grid gap-2 col-6 mx-auto">
                     <button type="submit" id="btn_logar" class="btn btn-primary">Logar</button>
                 </div>
@@ -30,28 +30,6 @@
     </main>
 
     <script src="/js/jquery.js"></script>
-<!--    <script src="/js/script.js"></script>-->
-    <script>
-        $('#formularioAcesso').on('submit', function(e) {
-            e.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: "/api/login",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    usuario: $('#usuario').val(),
-                    senha: $('#senha').val()
-                }),
-                success: function(response) {
-                    $('#mensagemErro').html('');
-                    window.location.href = "/cadastrar";
-                },
-                error: function(err) {
-                    $('#mensagemErro').html("Usuário/Senha incorretos.");
-                    console.log(err);
-                }
-            });
-        });
-    </script>
+    <script src="/js/scripts.js"></script>
 </body>
 </html>

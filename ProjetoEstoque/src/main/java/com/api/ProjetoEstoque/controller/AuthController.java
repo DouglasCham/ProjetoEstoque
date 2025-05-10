@@ -41,4 +41,10 @@ public class AuthController {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
+    
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout(HttpSession session) {
+        session.invalidate(); // Invalida a sessão atual
+        return ResponseEntity.ok().build();
+    }
 }

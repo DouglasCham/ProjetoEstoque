@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 @Table(name = "produtos")
-public class Produto {
+public class ProdutoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int ID;
+    private Integer ID;
     private int COD;
     private String NOME;
     private int QUANTIDADE;

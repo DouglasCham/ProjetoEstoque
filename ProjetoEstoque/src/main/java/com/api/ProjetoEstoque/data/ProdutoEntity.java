@@ -15,10 +15,10 @@ import org.springframework.stereotype.Component;
 public class ProdutoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer ID;
-    private int COD;
-    private String NOME;
-    private int QUANTIDADE;
-    private String ENDERECO;
-    private String DESCRICAO;
+    private Integer id;
+    private int cod;
+    private String nome;
+    private int quantidade;
+    private String endereco;
+    private String descricao;
 }

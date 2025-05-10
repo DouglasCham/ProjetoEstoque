@@ -5,25 +5,25 @@ $(document).ready( function() {
     });
 
     //VALIDAÇÃO ACESSO
-    $('#formularioAcesso').on('submit', function(event) {
-      event.preventDefault();
-
-      let user = $('#user').val().trim();
-      let password = $('#password').val().trim();
-      let erro = '';
-
-      if (user === '' || password === '') {
-        erro += 'Usuário/Senha incorretos.';
-      }
-      if (erro !== '') {
-        $('#mensagemErro').html(erro);
-      } else {
-        $('#mensagemErro').html('');
-        window.location.href = "../templates/cadastrar.html";
-        alert('Logado com sucesso.');
-        this.submit();
-      }
-    });
+    $('#formularioAcesso').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/api/login",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    usuario: $('#usuario').val(),
+                    senha: $('#senha').val()
+                }),
+                success: function(response) {
+                    $('#mensagemErro').html('');
+                    window.location.href = "cadastrar.html";
+                },
+                error: function() {
+                    $('#mensagemErro').html("Usuário/Senha incorretos.");
+                }
+            });
+        });
     //VALIDAÇÃO CADASTRO
     $('#formularioCadastro').on('submit', function(event) {
         event.preventDefault();

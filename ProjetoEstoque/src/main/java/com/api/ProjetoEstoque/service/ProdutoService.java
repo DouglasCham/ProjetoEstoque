@@ -12,7 +12,7 @@ public class ProdutoService {
     @Autowired
     ProdutoRepository produtoRepository;
     public ProdutoEntity cadastrarProduto(ProdutoEntity novoProduto){
-        novoProduto.setID(null);
+        novoProduto.setId(null);
         produtoRepository.save(novoProduto);
         return novoProduto;
     }
@@ -21,8 +21,8 @@ public class ProdutoService {
     }
     public ProdutoEntity transferirProduto(Integer produtoID, ProdutoEntity produtoRequest){
         ProdutoEntity produtoSelecionado = getProdutoID(produtoID);
-        produtoSelecionado.setQUANTIDADE(produtoRequest.getQUANTIDADE());
-        produtoSelecionado.setENDERECO(produtoRequest.getENDERECO());
+        produtoSelecionado.setQuantidade(produtoRequest.getQuantidade());
+        produtoSelecionado.setEndereco(produtoRequest.getEndereco());
         return produtoSelecionado;
     }
     public ProdutoEntity getProdutoID(Integer produtoID){
@@ -33,6 +33,6 @@ public class ProdutoService {
     }
     public void deletarProduto(Integer produtoID){
         ProdutoEntity produto = getProdutoID(produtoID);
-        produtoRepository.deleteById(produto.getID());
+        produtoRepository.deleteById(produto.getId());
     }
 }

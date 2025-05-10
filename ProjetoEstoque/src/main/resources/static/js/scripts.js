@@ -1,10 +1,8 @@
 $(document).ready( function() {
-        
+    
+    //BOTÕES DO MENU
     $("#btn_menu").on("click", function(){
         $("#menuPrincipal").toggleClass("ocultar");
-    });
-    $.get("/api/check").fail(function(){
-                window.location.href = "/";
     });
     $("#btn_logout").on("click", function() {
             $.get("/api/logout").done(function() {
@@ -91,6 +89,7 @@ $(document).ready( function() {
     $('#btn_buscar').click(function () {
             const cod = $('#codProduto').val().trim();
 
+            // Caso não seja informado um código de produto, retorna todos os produtos cadastrados;
             if (!cod) {
                 buscarProdutos();
                 return;

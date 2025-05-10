@@ -10,9 +10,9 @@
 <body>
     <div id="menuPrincipal" class="menuPrincipal ocultar">
       <div class="menuItens">
-        <a class="itemMenu" href="/cadastrar">Cadastrar produto</a>
-        <a class="itemMenu" href="/transferir">Transferir endereço</a>
-        <a class="itemMenu" href="/listar">Listar produtos</a>
+        <a class="btn btn-secondary itemMenu" href="/cadastrar">Cadastrar produto</a>
+        <a class="btn btn-secondary itemMenu" href="/transferir">Transferir endereço</a>
+        <a class="btn btn-secondary itemMenu" href="/listar">Listar produtos</a>
         <br/>
         <button id="btn_logout" class="btn btn-danger">Deslogar</button>
     </div>
@@ -31,11 +31,11 @@
                             <div class="row mb-3">
                                 <label for="codProduto" class="col-sm-2 col-form-label">Código do produto</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="codProduto">
+                                    <input type="text" class="form-control" id="codProduto" placeholder="Deixe vazio para buscar todos os produtos">
                             </div>
                             <button id="btn_buscar" type="button" class="btn btn-primary col-sm-2">Buscar</button>
                     </fieldset>
-                    <div id="mensagemErro" style="color: red;"></div>    
+                    <div id="resultadoBusca"></div>  
                 </form>
                 <table id="tabelaProdutos" class="table table-striped">
                     <thead>

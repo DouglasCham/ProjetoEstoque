@@ -4,6 +4,7 @@ import com.api.ProjetoEstoque.data.ProdutoEntity;
 import com.api.ProjetoEstoque.data.ProdutoRepository;
 import com.api.ProjetoEstoque.exception.ResourceNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,22 +14,18 @@ public class ProdutoService {
     ProdutoRepository produtoRepository;
     public ProdutoEntity cadastrarProduto(ProdutoEntity novoProduto){
         novoProduto.setId(null);
-        produtoRepository.save(novoProduto);
-        return novoProduto;
+        return produtoRepository.save(novoProduto);
     }
     public List<ProdutoEntity> listarTodosProdutos(){
         return produtoRepository.findAll();
     }
-    public ProdutoEntity transferirProduto(Integer produtoID, ProdutoEntity produtoRequest){
-        ProdutoEntity produtoSelecionado = getProdutoID(produtoID);
-        produtoSelecionado.setQuantidade(produtoRequest.getQuantidade());
-        produtoSelecionado.setEndereco(produtoRequest.getEndereco());
-        return produtoSelecionado;
+    public ProdutoEntity transferirProduto(ProdutoEntity produtoAtualizado){
+        return produtoRepository.save(produtoAtualizado);
     }
     public ProdutoEntity getProdutoID(Integer produtoID){
         return produtoRepository.findById(produtoID).orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado ID: " + produtoID));
     }
-    public ProdutoEntity getProdutoByCod(Integer cod){
+    public Optional<ProdutoEntity> buscarProdutoPorCod(Integer cod){
         return produtoRepository.findByCod(cod);
     }
     public boolean deletarProduto(Integer id){

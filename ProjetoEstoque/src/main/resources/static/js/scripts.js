@@ -3,7 +3,14 @@ $(document).ready( function() {
     $("#btn_menu").on("click", function(){
         $("#menuPrincipal").toggleClass("ocultar");
     });
-    
+    $.get("/api/check").fail(function(){
+                window.location.href = "/";
+    });
+    $("#btn_logout").on("click", function() {
+            $.get("/api/logout").done(function() {
+                window.location.href = "/";
+            });
+    });
     //VALIDAÇÃO ACESSO
     $('#formularioAcesso').on('submit', function(e) {
             e.preventDefault();
@@ -16,7 +23,6 @@ $(document).ready( function() {
                     senha: $('#senha').val()
                 }),
                 success: function(response) {
-                    $('#loginError').html('');
                     window.location.href = "/cadastrar";
                 },
                 error: function(err) {
@@ -24,54 +30,97 @@ $(document).ready( function() {
                 }
             });
         });
-    //VALIDAÇÃO CADASTRO
-    $('#formularioCadastro').on('submit', function(e) {
+    //CADASTRAR PRODUTO
+    $('#formularioCadastro').submit(function(e) {
         e.preventDefault();
+        
+        const produto = {
+            cod: $('#codProduto').val(),
+            nome: $('#nomeProduto').val(),
+            quantidade: $('#quantidadeProduto').val(),
+            endereco: $('#endProduto').val(),
+            descricao: $('#descProduto').val()
+        };
         
         $.ajax({
             type: "POST",
             url: "/api/cadastrar",
             contentType: "application/json",
-            data: JSON.stringify({
-                cod: $('#codProduto').val().trim(),
-                nome: $('#nomeProduto').val().trim(),
-                quantidade: $('#quantidadeProduto').val().trim(),
-                endereco: $('#endProduto').val().trim(),
-                descricao: $('#descProduto').val().trim()
-            }),
-            success: function(response){
-                alert("Produto cadastrado com sucesso.");
+            data: JSON.stringify(produto),
+            success: function(data){
+                $('#mensagemCadastro').html('<p style="color:green;">Produto cadastrado com sucesso!</p>');
+                $('#formularioCadastro')[0].reset();
             },
-            error: function(err) {
-                alert("Falha ao cadastrar o produto.");
-                console.log(err);
+            error: function(xhr) {
+                let mensagem = "Erro ao cadastrar produto.";
+                if (xhr.status === 409 || xhr.status === 400) {
+                    mensagem = xhr.responseText;
+                }
+                $('#mensagemCadastro').html('<p style="color:red">' + mensagem + '</p>');
             }
         });
       });
-    //VALIDAÇÃO TRANSFERIR
-    $('#formularioTransferir').on('submit', function(event) {
-      event.preventDefault();
+    //TRANSFERIR PRODUTO
+    $('#formularioTransferir').submit(function (e) {
+            e.preventDefault();
 
-      let codProduto = $('#codProduto').val().trim();
-      let quantidadeProduto = $('#quantidadeProduto').val().trim();
-      let endProduto = $('#endProduto').val().trim();
-      let erro = '';
+            const cod = $('#codProduto').val().trim();
+            const endereco = $('#endProduto').val().trim();
 
-      if (codProduto === '' || quantidadeProduto === '' || endProduto === '') {
-        erro += 'Preencha todos os campos para realizar o cadastro.';
-      }
-      if (erro !== '') {
-        $('#mensagemErro').html(erro);
-      } else {
-        $('#mensagemErro').html('');
-        alert('Produto transferido!');
-        this.submit();
-      }
-    });
+            if (!cod || !endereco) {
+                $('#mensagemTransferencia').html('<p style="color:red;">Preencha todos os campos.</p>');
+                return;
+            }
+
+            $.ajax({
+                url: '/api/transferir',
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify({ cod: cod, endereco: endereco }),
+                success: function (resposta) {
+                    $('#mensagemTransferencia').html('<p style="color:green;">' + resposta + '</p>');
+                    $('#formTransferencia')[0].reset();
+                },
+                error: function (xhr) {
+                    let msg = xhr.responseText || "Erro ao transferir produto.";
+                    $('#mensagemTransferencia').html('<p style="color:red;">' + msg + '</p>');
+                }
+            });
+        });
     //BUSCAR PRODUTOS
-    $('#btn_buscar').on('click', function(e) {
-//      e.preventDefault();
-        buscarProdutos();
+    $('#btn_buscar').click(function () {
+            const cod = $('#codProduto').val().trim();
+
+            if (!cod) {
+                buscarProdutos();
+                return;
+            }
+
+            $.ajax({
+                url: '/api/buscar/' + cod,
+                type: 'GET',
+                success: function (produto) {
+                    $('#resultadoBusca').html('');
+                    $('#tabelaProdutos tbody').html(`
+                        <tr>
+                            <td>${produto.cod}</td>
+                            <td>${produto.nome}</td>
+                            <td>${produto.quantidade}</td>
+                            <td>${produto.endereco}</td>
+                            <td>${produto.descricao}</td>
+                            <td>
+                                <a href="#" class="excluirProduto" data-id="${produto.id}">
+                                    <img src="/imgs/excluir.png" alt="excluir" class="icone-pequeno">
+                                </a>
+                            </td
+                        </tr>
+                    `);
+                },
+                error: function (xhr) {
+                    let msg = xhr.responseText || "Erro ao buscar produto.";
+                    $('#resultadoBusca').html('<p style="color:red;">' + msg + '</p>');
+                }
+            });
     });
     function buscarProdutos(){
         $.get("/api/listar", function(data) {

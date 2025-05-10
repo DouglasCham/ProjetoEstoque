@@ -10,9 +10,9 @@
 <body>
     <div id="menuPrincipal" class="menuPrincipal ocultar">
       <div class="menuItens">
-        <a class="itemMenu" href="/cadastrar">Cadastrar produto</a>
-        <a class="itemMenu" href="/transferir">Transferir endereço</a>
-        <a class="itemMenu" href="/listar">Listar produtos</a>
+        <a class="btn btn-secondary itemMenu" href="/cadastrar">Cadastrar produto</a>
+        <a class="btn btn-secondary itemMenu" href="/transferir">Transferir endereço</a>
+        <a class="btn btn-secondary itemMenu" href="/listar">Listar produtos</a>
         <br/>
         <button id="btn_logout" class="btn btn-danger">Deslogar</button>
     </div>
@@ -30,14 +30,8 @@
                     <fieldset class="row mb-3">
                             <div class="row mb-3">
                                 <label for="codProduto" class="col-sm-2 col-form-label">Cod. produto</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-4">
                                     <input type="text" class="form-control" id="codProduto">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="quantidadeProduto" class="col-sm-2 col-form-label">Quantidade</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control" id="quantidadeProduto">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -47,10 +41,10 @@
                                 </div>
                             </div>
                     </fieldset>
-                    <div id="mensagemErro" style="color: red;"></div>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="submit" class="btn btn-primary">Transferir</button>
                     </div>
+                    <div id="mensagemTransferencia"></div>
                   </form>
         </div>
     </main>

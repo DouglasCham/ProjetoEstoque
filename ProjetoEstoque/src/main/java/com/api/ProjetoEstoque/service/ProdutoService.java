@@ -28,6 +28,9 @@ public class ProdutoService {
     public ProdutoEntity getProdutoID(Integer produtoID){
         return produtoRepository.findById(produtoID).orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado ID: " + produtoID));
     }
+    public ProdutoEntity getProdutoByCod(Integer cod){
+        return produtoRepository.findByCod(cod);
+    }
     public void deletarProduto(Integer produtoID){
         ProdutoEntity produto = getProdutoID(produtoID);
         produtoRepository.deleteById(produto.getID());

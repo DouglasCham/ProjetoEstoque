@@ -4,31 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página inicial</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/styles.css"/>
 </head>
 <body>
-    <main>
-        <div class="formContainer row g-3">
-            <form id="formularioAcesso">
-                <div class="row mb-3">
-                    <div class="col-sm-12">
-                      <input type="text" class="form-control" id="usuario" placeholder="Usuário">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-12">
-                      <input type="password" class="form-control" id="senha" placeholder="Senha">
-                    </div>
-                </div>
-                <div id="loginError" style="color: red;"></div>
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="submit" id="btn_logar" class="btn btn-primary">Logar</button>
-                </div>
-            </form>
-        </div>
-    </main>
+        <form id="formularioAcesso">
+            <h3>Login</h3>
+        
+            <label for="usuario">Usuário</label>
+            <input type="text" placeholder="Nome de usuário" id="usuario">
 
+            <label for="senha">Senha</label>
+            <input type="password" placeholder="Senha" id="senha">
+            
+            <div id="loginError" style="color: red;"></div>
+            
+            <button type="submit" id="btn_logar">Logar</button>
+        </form>
     <script src="/js/jquery.js"></script>
     <script src="/js/scripts.js"></script>
 </body>

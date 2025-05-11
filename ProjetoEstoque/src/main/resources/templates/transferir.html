@@ -10,44 +10,34 @@
 <body>
     <div id="menuPrincipal" class="menuPrincipal ocultar">
       <div class="menuItens">
-        <a class="btn btn-secondary itemMenu" href="/cadastrar">Cadastrar produto</a>
-        <a class="btn btn-secondary itemMenu" href="/transferir">Transferir endereço</a>
-        <a class="btn btn-secondary itemMenu" href="/listar">Listar produtos</a>
+        <a class="itemMenu" href="/cadastrar">Cadastrar produto</a>
+        <a class="itemMenu" href="/transferir">Transferir endereço</a>
+        <a class="itemMenu" href="/listar">Listar produtos</a>
         <br/>
         <button id="btn_logout" class="btn btn-danger">Deslogar</button>
     </div>
         <div>
-            <img src="/imgs/menu.svg" id="btn_menu" class="btn_menu"/>
+            <img src="/imgs/menu_white.svg" id="btn_menu" class="pointer"/>
         </div>
     </div>
 
-    <div class="headerContainer">
-        <h1>Transferir endereço</h1>
-    </div>
-    <main>
-        <div class="formContainer">
-                <form id="formularioTransferir">
-                    <fieldset class="row mb-3">
-                            <div class="row mb-3">
-                                <label for="codProduto" class="col-sm-2 col-form-label">Cod. produto</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="codProduto" placeholder="Código do produto">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="endProduto" class="col-sm-2 col-form-label">Endereço</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="endProduto" placeholder="Novo endereço do produto">
-                                </div>
-                            </div>
-                    </fieldset>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="submit" class="btn btn-primary">Transferir</button>
-                    </div>
-                    <div id="mensagemTransferencia"></div>
-                  </form>
+    <form id="formularioTransferir" class="form_small">
+
+        <h3>Transferir</h3>
+
+        <label for="codProduto">Cod. produto</label>
+        <input type="text" id="codProduto" placeholder="Código do produto">
+
+        <label for="endProduto">Endereço</label>
+        <input type="text" id="endProduto" placeholder="Novo endereço do produto">
+
+        <div id="mensagemTransferencia"></div>
+        
+        <div class="center">
+            <button type="submit" class="btnEnvio">Transferir</button>
         </div>
-    </main>
+    </form>
+
     <script src="/js/jquery.js"></script>
     <script src="/js/scripts.js"></script>
     <script>
